@@ -10,7 +10,7 @@ const Certificate = () => {
   const certificateRef = useRef(null);
   const [name, setName] = useState('');
   const [course, setCourse] = useState('Sou. Venutai Chavan Polytechnic');
-  const [selectedOption, setSelectedOption] = useState('');
+  const [selectedOption, setSelectedOption] = useState('option1');
   const [imgDimensions, setImgDimensions] = useState({ width: 0, height: 0 });
   const [csvFile, setCsvFile] = useState(null);
   const [csvHeaders, setCsvHeaders] = useState([]);
@@ -215,7 +215,7 @@ const Certificate = () => {
         selectedOption === 'option4' ? 'option4Style' : 'option5Style';
 
   return (
-    <div className="p-4">
+    <div className="p-4 mb-18">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Left column - Form controls */}
         <div>
@@ -232,6 +232,24 @@ const Certificate = () => {
               onChange={(e) => setName(e.target.value)}
               className="w-full p-2 border rounded mb-2"
             />
+
+            <div className="mb-6">
+              <h3 className="text-lg font-semibold mb-2">Options</h3>
+              <div className="grid grid-cols-2 gap-2">
+                {['option1', 'option2', 'option3', 'option4', 'option5'].map((option) => (
+                  <label key={option} className="flex items-center gap-2">
+                    <input
+                      type="radio"
+                      name="option"
+                      value={option}
+                      checked={selectedOption === option}
+                      onChange={handleRadioChange}
+                    />
+                    {option.charAt(0).toUpperCase() + option.slice(1)}
+                  </label>
+                ))}
+              </div>
+            </div>
             <button
               onClick={onButtonClick}
               className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 w-full mb-6 "
@@ -243,16 +261,16 @@ const Certificate = () => {
           <h3 className="text-lg font-semibold mb-2">Bulk Certificate Generation</h3>
           <div className="mb-4 flex justify-center flex-col">
             <div className='my-10'>
-            <label className="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer hover:bg-blue-600">
-              Choose File
-              <input
-                type="file"
-                accept=".csv"
-                onChange={handleCsvFileChange}
-                className="hidden w-[100%]"
-              />
-            </label>
-            <span id="fileName" className="ml-2 text-gray-600 w-[100%]">{fileName}</span>
+              <label className="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer hover:bg-blue-600">
+                Choose File
+                <input
+                  type="file"
+                  accept=".csv"
+                  onChange={handleCsvFileChange}
+                  className="hidden w-[100%]"
+                />
+              </label>
+              <span id="fileName" className="ml-2 text-gray-600 w-[100%]">{fileName}</span>
             </div>
 
             {csvHeaders.length > 0 && (
@@ -331,7 +349,7 @@ const Certificate = () => {
         </div>
 
         {/* Right column - Preview */}
-        <div>
+        <div className='flex justify-center'>
           {/* <h3 className="text-lg font-semibold">Certificate Preview</h3> */}
           <div className="container" ref={certificateRef}>
             <img src={certificateTemplate} alt="certificate template" height={400} />

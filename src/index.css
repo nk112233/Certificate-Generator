@@ -39,6 +39,7 @@ body {
 
   left: 0;
 
+
   /* background-color: rebeccapurple; */
 
 }
@@ -55,10 +56,10 @@ body {
 
 .content h2{
 
-  margin-top: 16px;
+  margin-top: 14px;
 
   margin-left: 10px;
-  margin-bottom: 48px;
+  margin-bottom: 50px;
   font-size: small;
 
 }
